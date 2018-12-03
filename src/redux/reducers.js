@@ -21,7 +21,6 @@ function yyy(previousState = initYyyState, action) {
 }
 
 //默认暴露合并后的reducers函数
-// {xxx: function xxx() {}, yyy: function yyy() {}}
 export default combineReducers({
     xxx,
     yyy
