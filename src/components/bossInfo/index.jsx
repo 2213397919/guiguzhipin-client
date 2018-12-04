@@ -1,10 +1,6 @@
 import React, {Component} from 'react';
 import {NavBar, InputItem, TextareaItem, Button} from 'antd-mobile';
 import HeaderSelector from '../header-selector/index';
-
-
-
-
 class BossInfo extends Component {
     state = {
         header:'',

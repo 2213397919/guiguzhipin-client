@@ -21,15 +21,21 @@ function user(previousState = initState, action) {
             return previousState;
     }
 }
+function getRedirectPath(type, header) {
+    let path = '';
 
-// const initYyyState = {};
-// function yyy(previousState = initYyyState, action) {
-//     switch (action.type) {
-//         default :
-//             return previousState;
-//     }
-// }
+    if (type === 'boss') {
+        path = '/bossInfo';
+    } else {
+        path = '/dashen';
+    }
 
+    if (!header) {
+        path += 'info';
+    }
+
+    return path;
+}
 //默认暴露合并后的reducers函数
 export default combineReducers({
     user

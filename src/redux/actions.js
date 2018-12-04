@@ -1,5 +1,3 @@
-
-
 import {reqRegister,reqLogin} from '../api';
 import {AUTH_SUCCESS,AUTH_ERROR} from  './action-type';
 //定义同步的action creator
