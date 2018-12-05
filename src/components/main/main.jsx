@@ -3,16 +3,37 @@ import {Route,Redirect} from  'react-router-dom';
 import Cookies from  'js-cookie';
 import BossInfo from '../../containers/boss-info';
 import DaShenInfo from '../../containers/dashen-info';
+import Boss from  '../boss';
+import Message from  '../message';
+import Personal from '../personal';
+import {NavBar} from  'antd-mobile';
+import Footer from '../footer';
 
 class Main extends Component {
+    //用数组的形式，将有用的信息保存起来。
+    navList = [
+        {path:'/message' ,text:'消息列表',icon:"message",title:'消息'},
+        {path:'/personal',text:'个人中心',icon:"personal",title:'个人'},
+        {path:'/boss',text:'大神列表',icon:"laoban",title:'老板'},
+        {path:'/dashen',text:'老板列表',icon:"dashen",title:'大神'}
+    ]
   render  () {
+          //通过保存cookie，七天免登录。
           const userid = Cookies.get('userid');
           if (!userid) return <Redirect to="/login" />
-
+      //获取当前的路由路径部分
+      const {pathname} = this.props.location;
+      //找到与当前路径，匹配的对象
+      const current = this.navList.find(item => item.path === pathname);
       return (
           <div>
+              {current?<NavBar>{current.text}</NavBar>:null}
               <Route path='/bossinfo'  component={BossInfo}/>
               <Route path='/dasheninfo' component={DaShenInfo}/>
+              <Route path='/boss'  component={Boss}/>
+              <Route path='/message' component={Message}/>
+              <Route path='/personal' component={Personal}/>
+              {current?<Footer navList={this.navList}/>:null}
           </div>
       )
   }

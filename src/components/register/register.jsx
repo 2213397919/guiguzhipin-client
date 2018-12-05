@@ -32,6 +32,7 @@ class Register extends Component {
         const {username, password, rePassword, boss} = this.state;
         //调用容器组件传递的更新状态的方法
         this.props.register({type: boss ? 'boss' : 'dashen', password, rePassword, username});
+        console.log(username, password, rePassword, boss);
     }
     //有账户，转换到登录页面。
     toLogin = () => {
