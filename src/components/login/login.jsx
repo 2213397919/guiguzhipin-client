@@ -33,10 +33,11 @@ class Login extends Component {
     //没有账户，转换到注册页面。
     toRegister = () => {
         this.props.history.replace('/Register');
+        this.props.user.errMsg='';
     }
 
     render() {
-        const {errMsg, redirectTo} = this.props.user;
+        const {errMsgL, redirectTo} = this.props.user;
         if (redirectTo) {
             return <Redirect to={redirectTo}/>
         }
@@ -44,12 +45,12 @@ class Login extends Component {
                 <div>
                     <NavBar>硅谷直聘</NavBar>
                     <Logo/>
-                    <p className="err-msg">{errMsg}</p>
+                    <p className="err-msg">{errMsgL}</p>
                     <WhiteSpace/>
                     <List>
-                        <InputItem onChange={value => this.handleValue('username', value)}>用户名:</InputItem>
+                        <InputItem onChange={value => this.handleValue('username', value)} clear={true} editable={false}>用户名:</InputItem>
                         <InputItem onChange={value => this.handleValue('password', value)}
-                                   type="password">密&nbsp;&nbsp;&nbsp;码:</InputItem>
+                                   type="password" clear={true} editable={false}>密&nbsp;&nbsp;&nbsp;码:</InputItem>
                         <Button type='primary' onClick={this.login}>登录</Button>
                         <Button onClick={this.toRegister}>还没有账户</Button>
                     </List>

@@ -41,9 +41,9 @@ export const login = ({username,password})=>{
     //表单验证
     if (!username) {
         //变成同步action creator
-        return authError({errMsg: '请输入用户名'});
+        return authError({errMsgL: '请输入用户名'});
     } else if (!password) {
-        return authError({errMsg: '请输入密码'});
+        return authError({errMsgL: '请输入密码'});
     }
     return dispatch =>{
         reqLogin({username,password})
