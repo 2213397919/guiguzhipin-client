@@ -10,7 +10,7 @@ import Logo from '../logo/logo'
 
 class Login extends Component {
     //声明接收约束
-    static propType = {
+    static propTypes = {
         user: PropTypes.object.isRequired,
         login: PropTypes.func.isRequired
     }

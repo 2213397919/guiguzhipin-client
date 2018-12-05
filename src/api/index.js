@@ -7,5 +7,7 @@ import ajax from './ajax';
 const prefix = '';
 //定义请求,注册
 export const reqRegister = data => ajax(`${prefix}/register`,data,'POST');
-//定义请求,
+//定义请求,登录
 export const reqLogin = data => ajax(`${prefix}/login`,data,'POST');
+//
+export const reqUpdata= data => ajax(`${prefix}/update`,data,'POST');

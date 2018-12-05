@@ -31,7 +31,7 @@ class Register extends Component {
     register = async () => {
         const {username, password, rePassword, boss} = this.state;
         //调用容器组件传递的更新状态的方法
-        this.props.register({type: boss ? 'laoban' : 'dashen', password, rePassword, username});
+        this.props.register({type: boss ? 'boss' : 'dashen', password, rePassword, username});
     }
     //有账户，转换到登录页面。
     toLogin = () => {
@@ -41,6 +41,7 @@ class Register extends Component {
     render() {
         const {boss} = this.state;
         const {errMsg, redirectTo} = this.props.user;
+        //判断注册是否成功
         if (redirectTo) {
             //路由链接跳转
             return <Redirect to={redirectTo}/>

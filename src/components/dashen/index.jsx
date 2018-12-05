@@ -1,38 +1,53 @@
 import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 import {NavBar, InputItem, TextareaItem, Button} from 'antd-mobile';
 import HeaderSelector from '../header-selector/index';
-
-
-
-
-class DaShen extends Component {
-    state = {
-        header:'',
-        post :'',
-        company :'',
-        salary:'',
-        info:''
+import {Redirect} from "react-router-dom";
+class DaShenInfo extends Component {
+    static propTypes = {
+        user: PropTypes.object.isRequired,
+        upData: PropTypes.func.isRequired
     }
-    setHeader = header =>{
+    state = {
+        header: '',
+        work: '',
+        info: '',
+        type: 'dashen'
+    }
+    setHeader = header => {
         this.setState({
             header
         })
     }
-    handleChange = (type,val) =>{
-        this.setState({[type]:val});
+    handleChange = (type, val) => {
+        this.setState({[type]: val});
     }
-    render () {
-        return (
-            <div>
-                <NavBar>大神信息完善</NavBar>
-                <HeaderSelector setHeader={this.setHeader}/>
-                <InputItem onChange={val => {this.handleChange('salary', val)}}>求职岗位:</InputItem>
-                <TextareaItem title="个人介绍:" rows={3} onChange={val => {this.handleChange('info', val)}}/>
-                <Button type='primary'>保存</Button>
-            </div>
-        )
+    //收集用户填写的数据
+    upDataInfo = () => {
+        this.props.upData(this.state);
     }
-}
 
-export default DaShen;
+    render() {
+        const {errMsg, redirectTo} = this.props.user;
+
+        if (redirectTo === '/boss') {
+            return <Redirect to={redirectTo}/>
+        }
+            return (
+                <div>
+                    <NavBar>大神信息完善</NavBar>
+                    <HeaderSelector setHeader={this.setHeader}/>
+                    <p className="err-msg">{errMsg}</p>
+                    <InputItem onChange={val => {
+                        this.handleChange('work', val)
+                    }}>求职岗位:</InputItem>
+                    <TextareaItem title="个人介绍:" rows={3} onChange={val => {
+                        this.handleChange('info', val)
+                    }}/>
+                    <Button type='primary' onClick={this.upDataInfo}>保存</Button>
+                </div>
+            )
+        }
+    }
+export default DaShenInfo;
 

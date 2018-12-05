@@ -9,12 +9,18 @@ const initState = {
     username: '',
     type: '',
     _id: '',
-    errMsg: ''
+    errMsg: '',
+    redirectTo:'',
+    header:'',
+    post:'',
+    company:'',
+    salary:'',
+    info:''
 }
 function user(previousState = initState, action) {
     switch (action.type) {
         case AUTH_SUCCESS:
-            return action.data;
+            return {...action.data,redirectTo:getRedirectPath(action.data.type,action.data.header)};
         case AUTH_ERROR:
             return  {...initState,...action.data}
         default :
@@ -25,7 +31,7 @@ function getRedirectPath(type, header) {
     let path = '';
 
     if (type === 'boss') {
-        path = '/bossInfo';
+        path = '/boss';
     } else {
         path = '/dashen';
     }

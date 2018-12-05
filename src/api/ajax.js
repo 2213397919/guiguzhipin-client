@@ -17,12 +17,10 @@ export default async function(url,data,method='GET') {
 //    发送ajax请求
     const type = method.toLocaleUpperCase();
     if (type === 'GET') {
-        const result = await axios.get(url+'?'+qs);
-        return result.data;
+        return axios.get(url+'?'+qs);
     }else if (type === 'POST'){
-        const result = await axios.post(url,qs,{
+        return axios.post(url,qs,{
             'content-type': 'application/x-www-form-urlencoded'
         });
-        return result.data;
     }
 }
