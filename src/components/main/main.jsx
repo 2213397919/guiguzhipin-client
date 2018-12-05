@@ -12,10 +12,10 @@ import Footer from '../footer';
 class Main extends Component {
     //用数组的形式，将有用的信息保存起来。
     navList = [
-        {path:'/message' ,text:'消息列表',icon:"message",title:'消息'},
-        {path:'/personal',text:'个人中心',icon:"personal",title:'个人'},
         {path:'/boss',text:'大神列表',icon:"laoban",title:'老板'},
-        {path:'/dashen',text:'老板列表',icon:"dashen",title:'大神'}
+        {path:'/dashen',text:'老板列表',icon:"dashen",title:'大神'},
+        {path:'/message' ,text:'消息列表',icon:"message",title:'消息'},
+        {path:'/personal',text:'个人中心',icon:"personal",title:'个人'}
     ]
   render  () {
           //通过保存cookie，七天免登录。
