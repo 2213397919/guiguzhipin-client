@@ -10,7 +10,7 @@ class DaShenInfo extends Component {
     }
     state = {
         header: '',
-        work: '',
+        post: '',
         info: '',
         type: 'dashen'
     }
@@ -30,7 +30,7 @@ class DaShenInfo extends Component {
     render() {
         const {errMsg, redirectTo} = this.props.user;
 
-        if (redirectTo === '/boss') {
+        if (redirectTo === '/dashen') {
             return <Redirect to={redirectTo}/>
         }
             return (
@@ -38,10 +38,8 @@ class DaShenInfo extends Component {
                     <NavBar>大神信息完善</NavBar>
                     <HeaderSelector setHeader={this.setHeader}/>
                     <p className="err-msg">{errMsg}</p>
-                    <InputItem onChange={val => {
-                        this.handleChange('work', val)
-                    }}>求职岗位:</InputItem>
-                    <TextareaItem title="个人介绍:" rows={3} onChange={val => {
+                    <InputItem onChange={val => {this.handleChange('post', val)}}>求职岗位:</InputItem>
+                    <TextareaItem title="个人简介:" rows={3} onChange={val => {
                         this.handleChange('info', val)
                     }}/>
                     <Button type='primary' onClick={this.upDataInfo}>保存</Button>

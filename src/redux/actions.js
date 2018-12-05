@@ -68,9 +68,9 @@ export const upData = ({header,post,company,salary,info,type})=> {
         return authError({errMsg: '请选择头像'})
     } else if (!post) {
         return authError({errMsg: type === 'boss' ? '请填写招聘职位' : '请填写求职岗位'})
-    } else if (!company  && !company) {
+    } else if (type === 'boss' && !company) {
         return authError({errMsg: '请选择公司'})
-    } else if (!salary  && !salary) {
+    } else if (type === 'boss' && !salary) {
         return authError({errMsg: '请选择期望薪资'})
     } else if (!info) {
         return authError({errMsg: type === 'boss' ? '请填写职位要求' : '请填写个人简介'})
