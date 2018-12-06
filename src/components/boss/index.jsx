@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import { Card, WingBlank, WhiteSpace } from 'antd-mobile';
 import PropTypes from 'prop-types';
+import '../../assets/less/index.less'
 class Boss extends Component {
     static propTypes = {
         userList: PropTypes.array.isRequired,
@@ -21,7 +22,7 @@ class Boss extends Component {
               <WhiteSpace size="lg" />
               {
                   userList.map((item,index)=>{
-                      return (<div>
+                      return (<div className="content-list">
                           <Card key={index}>
                               <Card.Header
                                   thumb={require(`../../assets/images/头像${+item.header+1}.png`)}
