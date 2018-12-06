@@ -57,9 +57,9 @@ class Register extends Component {
                     <List>
                         <InputItem onChange={value => this.handleValue('username', value)}>用户名:</InputItem>
                         <InputItem onChange={value => this.handleValue('password', value)}
-                                   type="password" clear={true} editable={false}>密&nbsp;&nbsp;&nbsp;码:</InputItem>
+                                   type="password">密&nbsp;&nbsp;&nbsp;码:</InputItem>
                         <InputItem onChange={value => this.handleValue('rePassword', value)}
-                                   type="password" clear={true} editable={false}>确认密码:</InputItem>
+                                   type="password" >确认密码:</InputItem>
                         <Item>
                             用户类型:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
                             <Radio checked={!boss} onChange={this.handleValue.bind(null, 'boss', false)}>大神</Radio>

@@ -3,13 +3,19 @@ import {Route,Redirect} from  'react-router-dom';
 import Cookies from  'js-cookie';
 import BossInfo from '../../containers/boss-info';
 import DaShenInfo from '../../containers/dashen-info';
+import PropTypes from 'prop-types'
 import Boss from  '../boss';
 import Message from  '../message';
 import Personal from '../personal';
-import {NavBar} from  'antd-mobile';
+import {NavBar,Icon} from  'antd-mobile';
 import Footer from '../footer';
+import './index.less'
 
 class Main extends Component {
+    static propTypes = {
+        user:PropTypes.object.isRequired,
+        getUserInfo: PropTypes.func.isRequired
+    }
     //用数组的形式，将有用的信息保存起来。
     navList = [
         {path:'/boss',text:'大神列表',icon:"laoban",title:'老板'},
@@ -18,11 +24,20 @@ class Main extends Component {
         {path:'/personal',text:'个人中心',icon:"personal",title:'个人'}
     ]
   render  () {
+          //1. 判断本地有没有cookie，如果没有，直接去登录页面
           //通过保存cookie，七天免登录。
           const userid = Cookies.get('userid');
           if (!userid) return <Redirect to="/login" />
+      //2. 如果本地有cookie，redux中没有状态（用户之前登录过，刷新页面），必须将数据请求回来
+      if (!this.props.user._id){
+          this.props.getUserInfo();
+          return <Icon type="loading" size='lg' className="loading"/>
+      }
       //获取当前的路由路径部分
       const {pathname} = this.props.location;
+      if (pathname==='/'){
+          return  <Redirect to={this.props.user.redirectTo}/>;
+      }
       //找到与当前路径，匹配的对象
       const current = this.navList.find(item => item.path === pathname);
       return (

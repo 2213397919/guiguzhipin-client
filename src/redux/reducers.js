@@ -2,7 +2,7 @@
   作用：根据之前的状态（previousState）和更新数据的行为（action）产生一个新的状态（newState）
  */
 import {combineReducers} from 'redux';
-import {AUTH_SUCCESS,AUTH_ERROR } from  './action-type';
+import {AUTH_SUCCESS,AUTH_ERROR,UPDATE_USER_INFO,RESET_USER_INFO } from  './action-type';
 
 //初始化状态的值
 const initState = {
@@ -23,10 +23,16 @@ function user(previousState = initState, action) {
             return {...action.data,redirectTo:getRedirectPath(action.data.type,action.data.header)};
         case AUTH_ERROR:
             return  {...initState,...action.data}
+        case UPDATE_USER_INFO:
+            return {...action.data,redirectTo:getRedirectPath(action.data.type,action.data.header)};
+        case RESET_USER_INFO:
+        case AUTH_ERROR:
+            return  {...initState,...action.data}
         default :
             return previousState;
     }
 }
+//通过传入的type来判断，将跳转那个页面地址。
 function getRedirectPath(type, header) {
     let path = '';
 
@@ -35,11 +41,10 @@ function getRedirectPath(type, header) {
     } else {
         path = '/dashen';
     }
-
+    //如果没有header(头像)，则在跳转的路由后面加info，到信息完善页面。
     if (!header) {
         path += 'info';
     }
-
     return path;
 }
 //默认暴露合并后的reducers函数

@@ -48,9 +48,9 @@ class Login extends Component {
                     <p className="err-msg">{errMsgL}</p>
                     <WhiteSpace/>
                     <List>
-                        <InputItem onChange={value => this.handleValue('username', value)} clear={true} editable={false}>用户名:</InputItem>
+                        <InputItem onChange={value => this.handleValue('username', value)}>用户名:</InputItem>
                         <InputItem onChange={value => this.handleValue('password', value)}
-                                   type="password" clear={true} editable={false}>密&nbsp;&nbsp;&nbsp;码:</InputItem>
+                                   type="password" >密&nbsp;&nbsp;&nbsp;码:</InputItem>
                         <Button type='primary' onClick={this.login}>登录</Button>
                         <Button onClick={this.toRegister}>还没有账户</Button>
                     </List>

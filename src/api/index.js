@@ -9,5 +9,7 @@ const prefix = '';
 export const reqRegister = data => ajax(`${prefix}/register`,data,'POST');
 //定义请求,登录
 export const reqLogin = data => ajax(`${prefix}/login`,data,'POST');
-//
+//发送请求，将完善信息保存到数据库
 export const reqUpdata= data => ajax(`${prefix}/update`,data,'POST');
+//
+export const reqGetUserInfo= data => ajax(`${prefix}/user`);

@@ -1,8 +1,11 @@
-import {reqRegister,reqLogin,reqUpdata} from '../api';
-import {AUTH_SUCCESS,AUTH_ERROR} from  './action-type';
+import {reqRegister,reqLogin,reqUpdata,reqGetUserInfo} from '../api';
+import {AUTH_SUCCESS,AUTH_ERROR,UPDATE_USER_INFO,RESET_USER_INFO} from  './action-type';
 //定义同步的action creator
 export const authSuccess = data =>({type:AUTH_SUCCESS,data});
 export const authError = data =>({type:AUTH_ERROR,data});
+
+export const updateUserInfo = data => ({type: UPDATE_USER_INFO, data});
+export const resetUserInfo = data => ({type: RESET_USER_INFO, data});
 //定义异步action creator,注册
 export const register = ({username,password,rePassword,type})=>{
     //表单验证
@@ -88,6 +91,23 @@ export const upData = ({header,post,company,salary,info,type})=> {
             })
             .catch(err => {
                 dispatch(authError({errMsg: '网络错误，请刷新试试~'}));
+            })
+    }
+}
+export const getUserInfo = ()=>{
+    return dispatch =>{
+        reqGetUserInfo()
+            .then(({data})=>{
+                if (data.code === 0){
+                //    说明成功
+                    dispatch(updateUserInfo(data.data));
+                }else {
+                    dispatch(resetUserInfo({errMsg:'网络不稳定，请刷新试试。'}))
+                }
+                }
+            )
+            .catch(err=>{
+                dispatch(resetUserInfo({errMsg:'网络不稳定，请刷新试试。'}))
             })
     }
 }
