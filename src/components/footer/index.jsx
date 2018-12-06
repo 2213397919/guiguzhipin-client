@@ -6,7 +6,8 @@ import  './index.less'
 const Item = TabBar.Item;
 class Footer extends Component {
   static propTypes = {
-    navList : PropTypes.array.isRequired
+    navList : PropTypes.array.isRequired,
+      type:PropTypes.string.isRequired
   }
     //点击footer区域的按钮进行相应的跳转
     redirectTo = path => {
@@ -14,7 +15,7 @@ class Footer extends Component {
     }
   render () {
       //通过redux获取type
-      const type = 'boss';
+      const type = this.props.type;
 
       const filter = type === 'boss' ? '/dashen' : '/boss';
       //过滤掉老板或大神的数据

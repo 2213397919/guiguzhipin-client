@@ -4,7 +4,7 @@ import Cookies from  'js-cookie';
 import BossInfo from '../../containers/boss-info';
 import DaShenInfo from '../../containers/dashen-info';
 import PropTypes from 'prop-types'
-import Boss from  '../boss';
+import Boss from  '../../containers/boss';
 import Message from  '../message';
 import Personal from '../personal';
 import {NavBar,Icon} from  'antd-mobile';
@@ -48,7 +48,7 @@ class Main extends Component {
               <Route path='/boss'  component={Boss}/>
               <Route path='/message' component={Message}/>
               <Route path='/personal' component={Personal}/>
-              {current?<Footer navList={this.navList}/>:null}
+              {current?<Footer navList={this.navList} type ={this.props.user.type}/>:null}
           </div>
       )
   }

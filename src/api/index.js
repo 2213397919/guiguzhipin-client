@@ -11,5 +11,7 @@ export const reqRegister = data => ajax(`${prefix}/register`,data,'POST');
 export const reqLogin = data => ajax(`${prefix}/login`,data,'POST');
 //发送请求，将完善信息保存到数据库
 export const reqUpdata= data => ajax(`${prefix}/update`,data,'POST');
-//
-export const reqGetUserInfo= data => ajax(`${prefix}/user`);
+//定义获取用户信息的请求
+export const reqGetUserInfo= () => ajax(`${prefix}/user`);
+//定义获取用户列表的请求
+export const reqGetUserList= type => ajax(`${prefix}/userList`,{type});

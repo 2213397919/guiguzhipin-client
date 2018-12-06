@@ -1,27 +1,42 @@
 import React, {Component} from 'react';
 import { Card, WingBlank, WhiteSpace } from 'antd-mobile';
-
+import PropTypes from 'prop-types';
 class Boss extends Component {
+    static propTypes = {
+        userList: PropTypes.array.isRequired,
+        getUserList:PropTypes.func.isRequired
+    }
+    componentDidMount () {
+        //防止二次请求相同的数据
+        if (!this.props.userList.length){
+            this.props.getUserList('dashen');
+        }
+    }
   render () {
-    return (
-      <div>
+        console.log(this.props.userList);
+        const userList = this.props.userList.filter(item => item.header);
+      console.log(userList);
+      return (
           <WingBlank size="lg">
               <WhiteSpace size="lg" />
-              <Card>
-                  <Card.Header
-                      thumb={require('../../assets/images/头像1.png')}
-                      extra={<span>来自星星的你</span>}
-                  />
-                  <Card.Body>
-                      <div>职位：前端高级工程师</div>
-                      <div>公司：独角兽</div>
-                      <div>薪资：15K-18K</div>
-                      <div>描述：lalalalalal</div>
-                  </Card.Body>
-              </Card>
+              {
+                  userList.map((item,index)=>{
+                      return (<div>
+                          <Card key={index}>
+                              <Card.Header
+                                  thumb={require(`../../assets/images/头像${+item.header+1}.png`)}
+                                  extra={<span>{item.username}</span>}
+                              />
+                              <Card.Body>
+                                  <div>职位：{item.post}</div>
+                                  <div>描述：{item.info}</div>
+                              </Card.Body>
+                          </Card>
+                      </div>)
+                  })
+              }
               <WhiteSpace size="lg" />
           </WingBlank>
-      </div>
     )
   }
 }
