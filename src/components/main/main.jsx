@@ -7,7 +7,7 @@ import PropTypes from 'prop-types'
 import Boss from  '../../containers/boss';
 import Dashen from '../../containers/dashen';
 import Message from  '../message';
-import Personal from '../personal';
+import Personal from '../../containers/personal';
 import {NavBar,Icon} from  'antd-mobile';
 import Footer from '../footer';
 import './index.less'

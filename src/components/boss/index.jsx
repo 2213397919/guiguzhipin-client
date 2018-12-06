@@ -14,9 +14,7 @@ class Boss extends Component {
         }
     }
   render () {
-        console.log(this.props.userList);
         const userList = this.props.userList.filter(item => item.header);
-      console.log(userList);
       return (
           <WingBlank size="lg">
               <WhiteSpace size="lg" />
