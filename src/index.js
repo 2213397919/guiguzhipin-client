@@ -7,7 +7,6 @@ import Login from './containers/login';
 import Register from './containers/register';
 import Main from './containers/main';
 import './assets/less/index.less';
-import './test/socketio_test'
 
 ReactDOM.render((
     <Provider store={store}>

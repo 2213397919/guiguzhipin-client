@@ -6,17 +6,24 @@ import DaShenInfo from '../../containers/dashen-info';
 import PropTypes from 'prop-types'
 import Boss from  '../../containers/boss';
 import Dashen from '../../containers/dashen';
-import Message from  '../message';
+import Message from  '../../containers/message';
 import Personal from '../../containers/personal';
 import {NavBar,Icon} from  'antd-mobile';
 import Footer from '../footer';
+import Chart from  '../../containers/chart';
 import './index.less'
 
 class Main extends Component {
     static propTypes = {
         user:PropTypes.object.isRequired,
-        getUserInfo: PropTypes.func.isRequired
+        getUserInfo: PropTypes.func.isRequired,
+        getChatList: PropTypes.func.isRequired
+
     }
+    请求所有关于此用户的消息的数据
+    componentDidMount(){
+        this.props.getChatList();
+}
     //用数组的形式，将有用的信息保存起来。
     navList = [
         {path:'/boss',text:'大神列表',icon:"laoban",title:'老板'},
@@ -51,6 +58,7 @@ class Main extends Component {
                  <Route path='/dashen'  component={Dashen}/>
                  <Route path='/message' component={Message}/>
                  <Route path='/personal' component={Personal}/>
+                 <Route path="/chart/:id" component={Chart}/>
              </div>
               {current?<Footer navList={this.navList} type ={this.props.user.type}/>:null}
           </div>

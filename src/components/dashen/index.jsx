@@ -13,7 +13,9 @@ class Dashen extends Component {
             this.props.getUserList('boss');
         }
     }
-
+    goChart = id =>{
+        this.props.history.push(`/chart/${id}`);
+    }
     render () {
         const userList = this.props.userList.filter(item => item.header);
 
@@ -23,7 +25,7 @@ class Dashen extends Component {
                 {
                     userList.map((item, index) => {
                         return (
-                            <div key={index}>
+                            <div key={index} onClick = {this.goChart.bind(null,item._id)}>
                                 <Card >
                                     <Card.Header
                                         thumb={require(`../../assets/images/头像${+item.header + 1}.png`)}

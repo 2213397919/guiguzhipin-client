@@ -13,6 +13,9 @@ class Boss extends Component {
             this.props.getUserList('dashen');
         }
     }
+    goChart = id =>{
+        this.props.history.push(`/chart/${id}`);
+    }
   render () {
         const userList = this.props.userList.filter(item => item.header);
       return (
@@ -20,7 +23,7 @@ class Boss extends Component {
               <WhiteSpace size="lg" />
               {
                   userList.map((item,index)=>{
-                      return (<div className="content-list">
+                      return (<div onClick = {this.goChart.bind(null,item._id)}>
                           <Card key={index}>
                               <Card.Header
                                   thumb={require(`../../assets/images/头像${+item.header+1}.png`)}

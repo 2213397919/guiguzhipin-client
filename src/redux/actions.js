@@ -1,5 +1,6 @@
-import {reqRegister,reqLogin,reqUpdata,reqGetUserInfo,reqGetUserList} from '../api';
-import {AUTH_SUCCESS,AUTH_ERROR,UPDATE_USER_INFO,RESET_USER_INFO,UPDATE_USER_LIST,RESET_USER_LIST} from  './action-type';
+import {reqRegister,reqLogin,reqUpdata,reqGetUserInfo,reqGetUserList,reqGetChartList} from '../api';
+import io from 'socket.io-client';
+import {AUTH_SUCCESS,AUTH_ERROR,UPDATE_USER_INFO,RESET_USER_INFO,UPDATE_USER_LIST,RESET_USER_LIST,RESET_CHAT_MESSAGES,GET_CHAT_MESSAGES, UPDATE_CHAT_MESSAGES} from  './action-type';
 //定义同步的action creator
 export const authSuccess = data =>({type:AUTH_SUCCESS,data});
 export const authError = data =>({type:AUTH_ERROR,data});
@@ -9,6 +10,10 @@ export const resetUserInfo = data => ({type: RESET_USER_INFO, data});
 
 export const updateUserList = data => ({type: UPDATE_USER_LIST, data});
 export const resetUserList = () => ({type: RESET_USER_LIST});
+
+export const getChatMessages = data => ({type: GET_CHAT_MESSAGES, data});
+export const resetChatMessages = () => ({type: RESET_CHAT_MESSAGES});
+export const updateChatMessages = data=> ({type: UPDATE_CHAT_MESSAGES,data})
 
 //定义异步action creator,注册
 export const register = ({username,password,rePassword,type})=>{
@@ -134,3 +139,39 @@ export const getUserList = type=>{
             })
     }
 }
+//保证和服务器的链接只连接一次
+const socket = io('ws://localhost:5000');
+export const sendMessage = ({message, from, to}) => {
+    return dispatch => {
+        //向服务器发送了一条消息
+        console.log('浏览器端向服务器发送消息:', {message, from, to})
+        socket.emit('sendMsg', {message, from, to})
+        console.log('浏览器端向服务器发送消息:', {message, from, to})
+        //    保证只绑定一次
+        if (!socket.isFirst){
+            socket.isFirst=true;
+            //保证只绑定一次
+            socket.on('receiveMsg', function (data) {
+                console.log('浏览器端接收到服务器发送的消息:', data)
+                dispatch(updateChatMessages(data))
+            })
+
+        }
+    }
+}
+export const getChatList = ()=>{
+    return dispatch =>{
+        reqGetChartList()
+            .then(({data})=>{
+                if (data.code===0){
+                    return dispatch(getChatMessages(data.data))
+                } else {
+                    return dispatch(resetChatMessages())
+                }
+            })
+            .catch(err=>{
+                return dispatch(resetChatMessages())
+            })
+    }
+}
+
