@@ -2,12 +2,12 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {Provider} from 'react-redux';
 import {HashRouter, Switch, Route} from 'react-router-dom';
-
 import store from './redux/store';
 import Login from './containers/login';
 import Register from './containers/register';
 import Main from './containers/main';
 import './assets/less/index.less';
+import './test/socketio_test'
 
 ReactDOM.render((
     <Provider store={store}>
