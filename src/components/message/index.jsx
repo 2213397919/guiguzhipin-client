@@ -20,6 +20,7 @@ class Message extends Component {
         const userid = Cookies.get('userid');
         //从消息列表中找到所有通话的用户
         const {users, chatMsgs} = this.props.chatMessages;
+        // console.log(users, chatMsgs)
         //从每一个chatMsgs中的对象，找到from to与userid不同的id值
         //过滤掉相同id值，相同的id值只保留一个
         let users_id = {};
@@ -58,7 +59,7 @@ class Message extends Component {
 
         //将对象变成数组
         const chatList = Object.values(users_id);  // [{header, username, id}]
-
+        // console.log(chatList,users_id)
         return (
             <List className="my-list">
                 {

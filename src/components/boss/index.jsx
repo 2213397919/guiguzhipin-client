@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import { Card, WingBlank, WhiteSpace } from 'antd-mobile';
 import PropTypes from 'prop-types';
 import '../../assets/less/index.less'
+import QueueAnim from 'rc-queue-anim';
 class Boss extends Component {
     static propTypes = {
         userList: PropTypes.array.isRequired,
@@ -21,6 +22,7 @@ class Boss extends Component {
       return (
           <WingBlank size="lg">
               <WhiteSpace size="lg" />
+              <QueueAnim delay={1000} type="scale">
               {
                   userList.map((item,index)=>{
                       return (<div onClick = {this.goChart.bind(null,item._id)}>
@@ -37,6 +39,7 @@ class Boss extends Component {
                       </div>)
                   })
               }
+              </QueueAnim>
               <WhiteSpace size="lg" />
           </WingBlank>
     )

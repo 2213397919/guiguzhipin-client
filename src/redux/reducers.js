@@ -9,7 +9,8 @@ import {
     RESET_USER_LIST,
     RESET_CHAT_MESSAGES,
     GET_CHAT_MESSAGES,
-    UPDATE_CHAT_MESSAGES
+    UPDATE_CHAT_MESSAGES,
+    UPDATE_UNREADCOUNT,
 } from './action-type';
 
 //初始化状态的值
@@ -61,7 +62,7 @@ const initChatMessagesState = {
 function chatMessages(previousState = initChatMessagesState, action) {
     switch (action.type) {
         case GET_CHAT_MESSAGES :
-            const userid = Cookies.get("userid");
+            var userid = Cookies.get("userid");
             return {
                 ...action.data,
                 unReadCount: action.data.chatMsgs.reduce((pres,curr)=>{
@@ -75,6 +76,21 @@ function chatMessages(previousState = initChatMessagesState, action) {
                 users: previousState.users,
                 chatMsgs: [...previousState.chatMsgs, action.data]
             };
+        case UPDATE_UNREADCOUNT:
+            var userId = Cookies.get("userid");
+            console.log(action.data)
+            return {
+
+                chatMsgs:previousState.chatMsgs.map(chatMsgs=>{
+                    if (chatMsgs.from === action.data.from && chatMsgs.to === userId && !chatMsgs.read){
+                        return {...chatMsgs,read:true}
+                    }else {
+                        return chatMsgs;
+                    }
+                }),
+                users:previousState.users,
+                unReadCount:previousState.unReadCount - action.data
+            }
         default :
             return previousState;
     }

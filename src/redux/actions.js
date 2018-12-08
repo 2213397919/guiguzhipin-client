@@ -1,6 +1,8 @@
-import {reqRegister,reqLogin,reqUpdata,reqGetUserInfo,reqGetUserList,reqGetChartList} from '../api';
+import {reqRegister,reqLogin,reqUpdata,reqGetUserInfo,reqGetUserList,reqGetChartList,reqUpdateUnReadCount} from '../api';
 import io from 'socket.io-client';
-import {AUTH_SUCCESS,AUTH_ERROR,UPDATE_USER_INFO,RESET_USER_INFO,UPDATE_USER_LIST,RESET_USER_LIST,RESET_CHAT_MESSAGES,GET_CHAT_MESSAGES, UPDATE_CHAT_MESSAGES} from  './action-type';
+import {AUTH_SUCCESS,AUTH_ERROR,UPDATE_USER_INFO,RESET_USER_INFO,
+    UPDATE_USER_LIST,RESET_USER_LIST,RESET_CHAT_MESSAGES,GET_CHAT_MESSAGES,
+    UPDATE_CHAT_MESSAGES,UPDATE_UNREADCOUNT,RESET_UNREADCOUNT} from  './action-type';
 //定义同步的action creator
 export const authSuccess = data =>({type:AUTH_SUCCESS,data});
 export const authError = data =>({type:AUTH_ERROR,data});
@@ -14,6 +16,9 @@ export const resetUserList = () => ({type: RESET_USER_LIST});
 export const getChatMessages = data => ({type: GET_CHAT_MESSAGES, data});
 export const resetChatMessages = () => ({type: RESET_CHAT_MESSAGES});
 export const updateChatMessages = data=> ({type: UPDATE_CHAT_MESSAGES,data})
+
+export const updateCount = from => ({type: UPDATE_UNREADCOUNT,data:from});
+export const resetCount = msg=> ({type: RESET_UNREADCOUNT,data:msg})
 
 //定义异步action creator,注册
 export const register = ({username,password,rePassword,type})=>{
@@ -175,5 +180,20 @@ export const getChatList = ()=>{
     }
 }
 //更新未读消息数量
+export const updateUnReadCount = from=>{
+    return dispatch =>{
+        reqUpdateUnReadCount(from)
+            .then(res=>{
+                console.log(res)
+                const result = res.data;
+                if (result.code===0){
+                    console.log(result.data)
+                    dispatch(updateCount({from,count:result.data}));
+                }else {
+                    console.log(1)
+                    dispatch(resetCount({msg:result.msg}))
+                }
+                    })
 
-
+    }
+}

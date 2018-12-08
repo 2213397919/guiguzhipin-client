@@ -1,9 +1,8 @@
 import React, {Component} from 'react';
 import { TabBar } from 'antd-mobile';
 import PropTypes from 'prop-types';
-import {withRouter} from 'react-router-dom';
 import  './index.less'
-import message from "../../containers/message";
+
 const Item = TabBar.Item;
 class Footer extends Component {
   static propTypes = {

@@ -14,7 +14,8 @@ const Item = List.Item
 export default class Chat extends Component {
     static propTypes = {
         sendMessage:PropTypes.func.isRequired,
-        chatMessages:PropTypes.object.isRequired
+        chatMessages:PropTypes.object.isRequired,
+        updateUnReadCount:PropTypes.func.isRequired,
     }
     state={
         message:'',
@@ -31,6 +32,10 @@ export default class Chat extends Component {
     componentDidUpdate () {
         // 更新显示列表
         window.scrollTo(0, document.body.scrollHeight)
+    }
+    componentWillUnmount(){
+        console.log(this.props.match.params.id);
+        this.props.updateUnReadCount(this.props.match.params.id)
     }
     handleValue = val=>{
         this.setState({
@@ -70,11 +75,12 @@ export default class Chat extends Component {
     }
     render() {
          const {users,chatMsgs} = this.props.chatMessages;
-        console.log(users);
+        // console.log(users);
         //    获取发送用户的id
         const from = Cookies.get('userid');
         //    获取接受者的id
         const to = this.props.match.params.id;
+        // console.log(to);
         //排除其他人的干扰
         const other = users[to];
         //处理首次渲染没有数据的情况
