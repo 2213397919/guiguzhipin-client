@@ -115,7 +115,7 @@ export default class Chat extends Component {
                     }
                 </List>
                 {/*判断表情是否显示，显示，让其把内容顶上去。*/}
-                <div style={{height: this.state.isShow ? '180px' : 0}}></div>
+                <div style={{height: this.state.isShow ? '190px' : 0}}></div>
                 <div className='am-tab-bar'>
                     <InputItem
                         placeholder="请输入" onChange={this.handleValue}
