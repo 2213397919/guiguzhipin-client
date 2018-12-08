@@ -34,7 +34,7 @@ class DaShenInfo extends Component {
             return <Redirect to={redirectTo}/>
         }
             return (
-                <div>
+                <div style={{marginTop:"-50px",marginBottom:"-50px"}}>
                     <NavBar>大神信息完善</NavBar>
                     <HeaderSelector setHeader={this.setHeader}/>
                     <p className="err-msg">{errMsg}</p>

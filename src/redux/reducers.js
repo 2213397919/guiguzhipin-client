@@ -1,5 +1,5 @@
 import {combineReducers} from 'redux';
-
+import Cookies from 'js-cookie';
 import {
     AUTH_SUCCESS,
     AUTH_ERROR,
@@ -55,12 +55,19 @@ function userList(previousState = initUserListState, action) {
 
 const initChatMessagesState = {
     users: {},
-    chatMsgs: []
+    chatMsgs: [],
+    unReadCount:0
 }
 function chatMessages(previousState = initChatMessagesState, action) {
     switch (action.type) {
         case GET_CHAT_MESSAGES :
-            return action.data;
+            const userid = Cookies.get("userid");
+            return {
+                ...action.data,
+                unReadCount: action.data.chatMsgs.reduce((pres,curr)=>{
+                  return pres +(!curr.read && curr.to ===userid?1:0);
+                },0)
+            }
         case RESET_CHAT_MESSAGES :
             return initChatMessagesState;
         case UPDATE_CHAT_MESSAGES :
@@ -76,8 +83,8 @@ function chatMessages(previousState = initChatMessagesState, action) {
 function getRedirectPath(type, header) {
     let path = '';
 
-    if (type === 'laoban') {
-        path = '/laoban';
+    if (type === 'boss') {
+        path = '/boss';
     } else {
         path = '/dashen';
     }

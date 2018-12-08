@@ -38,7 +38,7 @@ class BossInfo extends Component {
           return <Redirect to={redirectTo}/>
       }
     return (
-        <div>
+        <div style={{marginTop:"-50px",marginBottom:"-50px"}}>
             <NavBar>老板信息完善</NavBar>
             <HeaderSelector setHeader={this.setHeader}/>
             <p className="err-msg">{errMsg}</p>

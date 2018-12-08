@@ -17,3 +17,5 @@ export const reqGetUserInfo= () => ajax(`${prefix}/user`);
 export const reqGetUserList= type => ajax(`${prefix}/userList`,{type});
 //定义获取用户的聊天信息
 export const reqGetChartList= () => ajax(`${prefix}/msglist`);
+//请求更新未读消息数量写函数
+// export const reqUpdateUnReadCount= from => ajax(`${prefix}/readmsg`,{from},'POST');

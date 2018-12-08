@@ -9,7 +9,7 @@ import Dashen from '../../containers/dashen';
 import Message from  '../../containers/message';
 import Personal from '../../containers/personal';
 import {NavBar,Icon} from  'antd-mobile';
-import Footer from '../footer';
+import Footer from '../../containers/footer';
 import Chart from  '../../containers/chart';
 import './index.less'
 
@@ -37,7 +37,7 @@ class Main extends Component {
           const userid = Cookies.get('userid');
           if (!userid) return <Redirect to="/login" />
       //2. 如果本地有cookie，redux中没有状态（用户之前登录过，刷新页面），必须将数据请求回来
-      if (!this.props.user._id){
+      if (!this.props.user._id && this.props.user.message ){
           this.props.getUserInfo();
           return <Icon type="loading" size='lg' className="loading"/>
       }
