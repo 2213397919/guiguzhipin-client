@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import { Card, WingBlank, WhiteSpace } from 'antd-mobile';
 import PropTypes from 'prop-types';
 import QueueAnim from 'rc-queue-anim';
-
 class Dashen extends Component {
     static propTypes = {
         userList: PropTypes.array.isRequired,

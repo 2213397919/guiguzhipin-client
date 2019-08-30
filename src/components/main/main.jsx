@@ -20,7 +20,7 @@ class Main extends Component {
         getChatList: PropTypes.func.isRequired
 
     }
-    请求所有关于此用户的消息的数据
+    // 请求所有关于此用户的消息的数据
     componentDidMount(){
         this.props.getChatList();
 }
@@ -65,6 +65,4 @@ class Main extends Component {
       )
   }
 }
-
-
 export default Main;

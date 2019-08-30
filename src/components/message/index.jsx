@@ -2,10 +2,8 @@ import React, {Component} from 'react';
 import { List,Badge } from 'antd-mobile';
 import Cookies from "js-cookie";
 import PropTypes from 'prop-types';
-
 const Item = List.Item;
 const Brief = Item.Brief;
-
 class Message extends Component {
     static propTypes = {
         chatMessages: PropTypes.object.isRequired
@@ -27,7 +25,7 @@ class Message extends Component {
         chatMsgs.forEach(item => {
             //找到与当前用户不同的其他用户的id
             const othersId = item.from === userid ? item.to : item.from;
-            //保证users_id对象中有且值保存一份其他用户id和对应的值
+            //保证users_id对象中有且只保存一份其他用户id和对应的值
             //保证新对象不会修改原对象
             if(!users_id[othersId]){
                 users_id[othersId]={};

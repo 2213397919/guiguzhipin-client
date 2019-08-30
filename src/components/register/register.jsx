@@ -50,7 +50,7 @@ class Register extends Component {
         }
             return (
                 <div>
-                    <NavBar>硅谷直聘</NavBar>
+                    <NavBar>浪里直聘</NavBar>
                     <Logo/>
                     <p className="err-msg">{errMsg}</p>
                     <WhiteSpace/>

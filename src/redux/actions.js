@@ -1,4 +1,5 @@
 import {reqRegister,reqLogin,reqUpdata,reqGetUserInfo,reqGetUserList,reqGetChartList,reqUpdateUnReadCount} from '../api';
+//客户端使用socket.io发送与接收消息。
 import io from 'socket.io-client';
 import {AUTH_SUCCESS,AUTH_ERROR,UPDATE_USER_INFO,RESET_USER_INFO,
     UPDATE_USER_LIST,RESET_USER_LIST,RESET_CHAT_MESSAGES,GET_CHAT_MESSAGES,
@@ -62,6 +63,7 @@ export const login = ({username,password})=>{
     } else if (!password) {
         return authError({errMsgL: '请输入密码'});
     }
+    //通过thunk实现了异步编程。
     return dispatch =>{
         reqLogin({username,password})
             .then(({data})=>{

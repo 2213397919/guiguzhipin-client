@@ -6,8 +6,6 @@ import {NavBar,List,WhiteSpace,InputItem,Button} from 'antd-mobile';
 import {Redirect} from 'react-router-dom';
 //引入logo图
 import Logo from '../logo/logo'
-
-
 class Login extends Component {
     //声明接收约束
     static propTypes = {
@@ -43,7 +41,7 @@ class Login extends Component {
         }
             return (
                 <div>
-                    <NavBar>硅谷直聘</NavBar>
+                    <NavBar>浪里直聘</NavBar>
                     <Logo/>
                     <p className="err-msg">{errMsgL}</p>
                     <WhiteSpace/>

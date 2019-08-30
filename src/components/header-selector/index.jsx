@@ -23,6 +23,7 @@ class HeaderSelector extends Component {
     render () {
         const {header} = this.state;
         const data = Array.from(new Array(20)).map((_val, i) => ({
+            //涉及多张图片时，可以使用require来引入图片。
             icon: require(`../../assets/images/头像${i + 1}.png`),
             text: `头像${i + 1}`,
         }));
